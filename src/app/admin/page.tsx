@@ -272,7 +272,7 @@ export default function AdminPage() {
         const storageBase =
           process.env.NEXT_PUBLIC_SUPABASE_URL ||
           process.env.SUPABASE_URL ||
-          "https://your-project.supabase.co";
+          "https://xgzhbythxzyqsbeqepgv.supabase.co";
         finalCoverUrl = `${storageBase}/storage/v1/object/public/album-covers/Olivia%20Rodrigo%20iPad%20screen%204%20u.jpg`;
       }
 

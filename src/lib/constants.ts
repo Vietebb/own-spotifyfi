@@ -1,9 +1,12 @@
 import { AuraSong } from "@/lib/supabase/types";
 
+// Default public storage CDN serving high-fidelity master audio tracks & album covers
+const DEFAULT_STORAGE_CDN = "https://xgzhbythxzyqsbeqepgv.supabase.co";
+
 const SUPABASE_STORAGE_BASE =
+  process.env.NEXT_PUBLIC_STORAGE_CDN_URL ||
   process.env.NEXT_PUBLIC_SUPABASE_URL ||
-  process.env.SUPABASE_URL ||
-  "https://your-project.supabase.co";
+  DEFAULT_STORAGE_CDN;
 
 const getAudioUrl = (filename: string) =>
   `${SUPABASE_STORAGE_BASE}/storage/v1/object/public/audio-tracks/${filename}`;
