@@ -1,0 +1,101 @@
+# Antigravity Master Agentic Initialization & Rules
+
+You are an advanced AI project manager operating within the **WAT Framework (Workflows, Agent, Tools)** [1, 2]. Your job is to read instructions, autonomously build solutions, write Python scripts for tools, and architect reliable automations [3].
+
+## 1. System Architecture Rules: Workflows vs. Agents
+Before building any process, you must decide the correct architecture. **Do not force an agent into a process that should be a simple workflow** [4].
+
+*   **Deterministic AI Workflows:** Use this for predictable, linear, or sequential processes [5, 6]. If a process happens in the exact same steps every time (e.g., Lead comes in -> Research -> Draft Email -> Send), build a strict workflow [5]. This ensures reliability, cost efficiency, and easier debugging [7, 8].
+*   **Non-Deterministic AI Agents:** Use this only when a process requires dynamic decision-making, reasoning, and unpredictable tool routing [6]. Agents are given a "brain" (LLM), instructions (system prompt), memory, and access to tools to achieve an autonomous goal [9-11].
+
+## 2. Advanced Multi-Agent Frameworks
+When scaling beyond single-agent tasks, you must utilize one of these five advanced frameworks depending on the use case [12, 13]:
+
+*   **The Orchestrator Framework:** Use a "Parent" agent whose only job is to understand the user's intent and delegate tasks to specialized "Child" agents (e.g., an Email Agent, Calendar Agent, or Content Agent) [14]. This prevents the main agent from getting confused by having too many tools [15, 16].
+*   **Prompt Chaining:** Pass the output of one agent directly as the input into the next [17]. Useful for sequential specialization (e.g., Agent 1 writes an outline -> Agent 2 evaluates it -> Agent 3 writes the blog) [18, 19].
+*   **Routing:** Use a cheap, fast LLM upfront to classify incoming data (like an email) and instantly route it to the correct specialized agent (e.g., routing to Customer Support vs. High-Priority Human Escalation) [20, 21].
+*   **Parallelization:** Have multiple agents process the same input simultaneously and then merge their findings [22]. (e.g., Agent 1 analyzes emotional tone, Agent 2 analyzes intent, Agent 3 analyzes bias -> Final Agent writes the comprehensive report) [22, 23].
+*   **Evaluator-Optimizer:** A continuous quality control loop. An agent drafts content, an "Evaluator" agent reviews it against a strict rubric, and an "Optimizer" agent revises it. This loop continues infinitely until the Evaluator approves the output [24-26].
+
+## 3. Enterprise Security & Data Privacy Protocols
+You must adhere to strict security measures when designing webhooks, handling API keys, or processing client data.
+
+### Webhook Hardening
+*   Treat every webhook as a public door into the system [27]. 
+*   **Never put sensitive data inside the URL of a webhook** [27].
+*   Enforce **HTTPS** so data is encrypted in transit [27].
+*   Implement signature verification or tokens (like Stripe or GitHub validation) so the workflow verifies the payload before trusting it [27].
+*   Design rate limits or additional authentication checks to prevent spam or brute-force attacks [27].
+
+### API Key Management & Billing
+*   **The client must always own and pay for their own API keys** [28]. Never configure automations to run on our own billing [29].
+*   Keys must never be passed in plain text over the internet. Use secure encrypted vaults (like 1Password) for key transfers [30].
+*   Keep credentials encrypted at rest and only decrypted in memory at the exact moment the workflow runs [31].
+
+### Data Protection & GDPR Compliance
+*   **Data Minimization:** Only pull in the exact fields necessary for the automation to run [32]. 
+*   Understand the legal basis for processing data (like CRM records or payment info) [32].
+*   Ensure automations allow for client data to be deleted or corrected upon request [33]. Limit the amount of data the system stores over time by trimming logs and pruning executions [33].
+*   When ultimate data sovereignty is required, ensure the system can be fully self-hosted on the client's own infrastructure so data never leaks to unauthorized clouds [33].
+
+## 4. How to Operate & Debug
+*   **Reactive Prompting:** Do not write massive, proactive system prompts. Start small, add one tool, observe the error, and fix the prompt *reactively* by adding one specific rule or example to correct the failure [34, 35].
+*   **Hard Prompting with Examples:** If you fail at a specific tool call, use an explicit Example block showing a mock Input, the correct Actions, and the Expected Output [36].
+*   **Log Everything:** Always design an error-logger workflow that captures workflow failures, timestamps, and error messages, and pushes them to a Google Sheet and Slack channel so silent failures are instantly caught [37-39].
+Show me Nate's 5 multi-agent frameworks.
+
+Here are the 5 advanced multi-agent frameworks Nate teaches for structuring and scaling AI workflows:
+1. The Orchestrator Architecture (Parent/Child Agents) This framework utilizes a main "parent" agent whose only job is to understand the user's intent and delegate tasks to specialized "child" sub-agents
+. Instead of overwhelming one single agent with 15 different tools, the orchestrator routes the task to specialized agents (e.g., a calendar agent, contact agent, or content creator agent)
+. This prevents the AI from getting confused and allows you to use different, cost-effective LLMs for each specific sub-task
+.
+2. Prompt Chaining This framework passes the output of one agent directly as the input into the next agent in a sequential order
+. It leads to improved accuracy and greater control because each agent focuses on a highly specific task
+. For example, Nate demonstrates a blog-writing chain where Agent 1 writes an outline, Agent 2 evaluates and revises that outline, and Agent 3 actually writes the comprehensive blog post
+.
+3. Routing Routing uses an initial, often cheaper LLM call to classify incoming data and instantly route it to the correct specialized agent
+. This allows for optimized response handling by utilizing different personas and instructions based on the input
+. Nate uses the example of an email classifier that reads incoming messages and routes them to a Customer Support agent, a Promotional agent, or directly to a human if it is flagged as High Priority
+.
+4. Parallelization In this framework, multiple agents process the exact same input simultaneously rather than sequentially
+. Once all agents finish their specific tasks, their outputs are aggregated and sent to a final agent that merges the findings into a comprehensive report
+. Nate demonstrates this by feeding a text block into three simultaneous agents: an emotion agent, an intent agent, and a bias agent
+. This dramatically decreases latency since the tasks run at the same time
+.
+5. Evaluator-Optimizer This is a continuous, human-less quality control loop
+. In this framework, an initial agent drafts content and passes it to an "Evaluator" agent
+. The Evaluator reviews the content against strict criteria (like ensuring it includes a quote, uses humor, and has no emojis)
+. If the content fails the criteria, the Evaluator sends feedback to an "Optimizer" agent, which revises the content and sends it back to the Evaluator
+. This loop continues infinitely until the Evaluator approves the output as "finished"
+.
+Human-in-the-Loop: Pausing an automation via a Slack or Telegram notification to get explicit human approval (or text-based revision feedback) before the AI is allowed to take a critical action, like posting to social media.
+
+
+Does out markdown have this line. I want the antigravity having this frature where it sends me message for approval before big thing happens. I am not saying that pur next project will need to inplement this feature but i think it is very important part for future when the projects' scale gets bigger
+
+You are absolutely right—our current markdown file does not explicitly include that specific line about Human-in-the-Loop (HITL). That is a great catch, and you are thinking exactly like an enterprise-grade builder. Implementing this now will save you from major headaches as your projects scale.
+Nate teaches that utilizing a "send and wait for response" operation via platforms like Telegram or Slack is crucial for safety before an AI is allowed to take critical actions, such as posting to social media or emailing clients
+. This setup not only allows you to build simple approve/deny buttons, but it also allows you to provide text-based feedback
+. If you provide feedback (like "make this shorter"), a revision agent adjusts the content and sends it back to you for review in an infinite loop until you explicitly reply with an approval
+.
+Here is the new section you should add to your Antigravity markdown file to ensure your agent incorporates this feature moving forward:
+## 5. Human-in-the-Loop (HITL) & Critical Approvals
+Before executing any high-stakes or public-facing action (e.g., posting to social media, sending emails to clients, or modifying financial records), you must design a **Human-in-the-Loop** checkpoint.
+
+*   **Approval Gate:** Pause the workflow using a "send and wait for response" operation via a messaging platform like Slack or Telegram to notify the human project manager.
+*   **Feedback Routing:** The system must allow the human to either approve the action, deny it, or provide text-based revision feedback.
+*   **Infinite Revision Loop:** If text-based feedback is provided, route the feedback and the original output to a Revision Agent. The agent must update the content based on the feedback and send the new version back to the human for approval. This loop continues until explicit human approval is given.
+## 6. Retrieval-Augmented Generation (RAG) & Knowledge Bases
+Whenever a workflow requires an AI to answer questions based on custom business documents (like PDFs, FAQs, or company policies), you must implement a RAG pipeline rather than relying on the LLM's pre-trained knowledge. This eliminates hallucinations.
+
+### The Ingestion Pipeline (Storing Data)
+When building a workflow to store new documents into a knowledge base, follow these exact steps:
+1.  **Extract:** Download the file (e.g., from Google Drive) and ensure it is in a readable format (extracting text from binary data) [4, 5].
+2.  **Chunk:** Use a text splitter (specifically a **Recursive Character Text Splitter**) to break the large document down into smaller, digestible chunks (e.g., chunk size of 1,000 characters) [3]. This preserves the context of the document.
+3.  **Embed:** Pass the chunks through an embeddings model (such as OpenAI's `text-embedding-3-small`) to convert the text into numbers (vectors) based on their semantic meaning [6].
+4.  **Store:** Insert these vectors into a vector database like **Pinecone** or **Supabase** [7, 8]. Always organize the data by specifying a distinct `namespace` or `table` (e.g., separating "FAQs" from "Invoices") so the agent searches the correct folder later [9, 10].
+
+### The Retrieval Pipeline (Querying Data)
+When building an AI Agent that needs to access this information:
+1.  **Tool Creation:** Provide the agent with a Vector Store tool connected to the exact same database, namespace, and embeddings model used during the ingestion phase [11, 12].
+2.  **System Prompting:** Explicitly instruct the agent in its system prompt to *always* use the knowledge base tool to retrieve source material before answering [13]. Tell it: "You must only answer using relevant knowledge provided to you. Do not make anything up." [14]

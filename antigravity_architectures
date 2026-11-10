@@ -1,0 +1,32 @@
+# Antigravity Multi-Agent Architecture Reference
+
+As the Antigravity Master Agent, your goal during the **planning phase** of any new project is to determine the most efficient, reliable, and cost-effective system design. 
+
+Before building, review the following 5 advanced multi-agent frameworks. You must analyze the user's requirements to discover whether a project needs one of these frameworks. **Do not force a multi-agent framework into a process that can be solved with a simple deterministic AI workflow**, as unnecessary agents increase latency, cost, and the risk of errors [1]. 
+
+Only deploy these frameworks when the scale, complexity, or quality requirements of the project demand dynamic decision-making.
+
+## 1. The Orchestrator Architecture (Parent/Child)
+**When to use:** Use this when a user's intent is complex and requires access to many different, unrelated tools (e.g., writing a blog, sending an email, and booking a calendar event all from one prompt) [2].
+*   **How it works:** Do not give a single agent 15 different tools; it will get confused. Instead, create a "Parent" Orchestrator agent whose *only* job is to understand the user's intent and delegate tasks [3, 4]. 
+*   **Execution:** The Parent agent routes the task to highly specialized "Child" agents (e.g., an Email Agent, a Calendar Agent). This allows you to use cheap models for the parent and specialized models for the children, resulting in highly reusable components [5].
+
+## 2. Prompt Chaining
+**When to use:** Use this when a task requires sequential specialization, high accuracy, and strict formatting (e.g., long-form content creation) [6].
+*   **How it works:** Pass the output of one agent directly as the input into the next agent [7]. 
+*   **Execution:** For example, Agent 1 (fast model) writes an outline -> Agent 2 (reasoning model) evaluates and refines the outline -> Agent 3 (creative model) writes the final blog post [8, 9]. This provides greater control over each step and reduces hallucinations [6].
+
+## 3. Routing
+**When to use:** Use this when incoming data is unpredictable but needs to be sorted into predefined categories (e.g., managing a general inbox) [10].
+*   **How it works:** Use a fast, cheap initial LLM call to act as a classifier for the incoming data [10].
+*   **Execution:** The router agent reads the input and instantly sends it down a specialized branch. For example, routing an angry email to a High-Priority Human Escalation agent, or a standard question to a Customer Support agent [11, 12]. This optimizes response handling by keeping personas and instructions highly specific [10].
+
+## 4. Parallelization
+**When to use:** Use this when an input requires multiple independent analyses, and you need to decrease latency (e.g., comprehensive data analysis) [13].
+*   **How it works:** Instead of having one agent do three tasks sequentially, split the prompt and send it to multiple specialized agents to process simultaneously [13].
+*   **Execution:** For example, Agent 1 analyzes text for emotional tone, Agent 2 analyzes intent, and Agent 3 analyzes bias at the exact same time [13, 14]. Once all finish, send their data to a Final Agent that merges the findings into a comprehensive report [14].
+
+## 5. Evaluator-Optimizer
+**When to use:** Use this when the output must meet extremely strict, high-quality criteria before being finalized (e.g., generating client-facing reports or code) [15].
+*   **How it works:** A continuous, human-less quality control loop [15]. 
+*   **Execution:** A drafting agent creates the content and passes it to an "Evaluator" agent. The Evaluator checks the work against a strict rubric. If it fails, the Evaluator sends exact feedback to an "Optimizer" agent to revise the content [16, 17]. This loop continues infinitely until the Evaluator agent outputs that the work is "finished" and meets all criteria [16, 17].
